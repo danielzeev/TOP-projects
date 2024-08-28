@@ -1,5 +1,3 @@
-// Check the JS is linked to html
-// console.log("Hello World")
 
 // Computer selection 
 function getComputerChoice() {
@@ -30,21 +28,18 @@ function playGame() {
         };
         
         // Calculate cross product
-        let humanVector    = vectors[humanChoice]
-        let computerVector = vectors[computerChoice]    
-        let crossProduct = (humanVector[0] * computerVector[1]) - (humanVector[1] * computerVector[0])
+        let humanVector    = vectors[humanChoice];
+        let computerVector = vectors[computerChoice];
+        let crossProduct   = (humanVector[0] * computerVector[1]) - (humanVector[1] * computerVector[0]);
         
         // Using cross product to determine winner
         if (crossProduct < 0) {
-            // console.log(outcomes['win']);
             roundResult = outcomes['win'];
             humanScore += 1;
         } else if (crossProduct > 0) {
-            // console.log(outcomes['lose']);
             roundResult = outcomes['lose'];
             computerScore += 1;       
         } else {
-            // console.log(outcomes['tie']);
             roundResult = outcomes['tie'];
         }
     }   
@@ -53,22 +48,37 @@ function playGame() {
     let humanScore    = 0;
     let computerScore = 0;    
     let roundResult   = '';
-    
-    let resultsDiv = document.querySelector('.results-container');
-    let buttons    = document.querySelector('.button-container')
-    
+    let roundNumber   = 1; 
+        
     // Event Listener for button click
+    let results = document.querySelector('.results-container');
+    let buttons = document.querySelector('.button-container');
+
     buttons.addEventListener('click', (event) => {
+        // Get human and computer selection, play single round
         let humanSelection    = event.target.id;
         let computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
+        
+        // Update round results text and round number
+        results.textContent = `Round ${roundNumber}:  ` + roundResult;
+        roundNumber++;
+        let p         = document.createElement('p');
+        p.textContent = `Scores: You: ${humanScore}  -  Comp: ${computerScore}`;
+        results.appendChild(p);
 
-        resultsDiv.textContent = `${roundResult}   |   Scores: You: ${humanScore}  -  Comp: ${computerScore}`; 
-
+        // Game over
         if (humanScore === 5 || computerScore === 5) {
-            console.log("Game Over")
-            let winner = (humanScore > computerScore) ? "Human" : "Computer";
-            console.log(`Winner: ${winner}`)
+            let winner = (humanScore > computerScore) ? "human" : "computer";
+            
+            p = document.createElement('p');
+            p.textContent = `Game Over! You ${winner === 'human' ? "win" : "lose"}!`;
+            results.appendChild(p);
+            
+            // Reset score
+            humanScore    = 0;
+            computerScore = 0;
+            roundNumber   = 0;
         }
     });
 
@@ -78,5 +88,3 @@ function playGame() {
 let scores = playGame()
 let humanScore = scores[0]
 let computerScore = scores[1]
-
-// console.log("This is a log")
