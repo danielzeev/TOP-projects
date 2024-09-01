@@ -26,11 +26,22 @@ for (let i = 1; i <= numSquaresPerRow; i++) {
         singleSquare.style.width  = squareWidth;
         singleSquare.style.height = squareHeight;
         singleSquare.style.border = squareBorder;
-        // singleSquare.style.padding = squarePadding;
         
+        // Mouseover event listener
+        // singleSquare.addEventListener("mouseenter", (event) => {
+        //     event.target.style.backgroundColor = "orange";
+        // });
+
         // Append to row
         row.appendChild(singleSquare);
     }
     // Append row to grid
     gridContainer.appendChild(row)
 }
+
+
+gridContainer.addEventListener('mouseover', (event) => {
+    if (event.target.classList.contains('square')) {
+        event.target.style.backgroundColor = "orange";
+    }
+});
