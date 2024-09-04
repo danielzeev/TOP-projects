@@ -60,6 +60,7 @@ const squareBorder = "1px solid black";
 // Selectors
 let gridContainerDiv = document.querySelector(".grid-container")
 let rangeInputSlider = document.getElementById("range-input"); // change to gridSizeSlider?
+let rangeInputValue  = document.getElementById("range-output");
 let clearBtn         = document.getElementById("clear-button");
 let rainbowBtn       = document.getElementById("rainbow-button");
 let colorBtn         = document.getElementById("color-button");
@@ -119,6 +120,7 @@ function randomColor() {
 // Grid size change (slider)
 rangeInputSlider.addEventListener('change', (event) => {
     gridSize = Number(event.target.value);
+    rangeInputValue.textContent = `${gridSize} x ${gridSize}`;
     createGrid(gridSize);
 });
 
