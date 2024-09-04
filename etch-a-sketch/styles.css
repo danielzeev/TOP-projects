@@ -1,30 +1,95 @@
-main {
-    display: flex;
-    gap: 10px;
+input::-webkit-color-swatch {
+    border: none;
 }
 
+body {
+    /* background-color: rgb(252, 252, 252); */
+    background-color: rgb(230, 230, 230);
+}
+
+main {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+/* Right side of page */
 .grid-container {
     display: flex;
     flex-direction: column;
-    max-width: 960px;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 0 5px rgba(0,0,0,.05), 2px 2px 5px rgba(0,0,0,.1);
+    padding: 1px;
 }
 
 .row {
     display: flex;
+    flex-grow: 1;
+    /* flex: 1; */
 }
 
+.square {
+    flex-grow: 1;
+    border: 0.1px solid gray;
+}
+
+/* Left side of page */
 .controls-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    align-items: stretch;
+    gap: 20px;
+    width: 150px;
+    /* height: 150px; */
+}
+
+.grid-range-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#range-input {
+    accent-color: grey;
+}
+
+#color-button {
+    padding: 0;
+    border: solid;
+    background-color: black;
 }
 
 
+/* Common button and input properties */
 
-.grid-container, 
-.row {
-    /* gap: 1px; */
+/* Grow on hover */
+.grow { 
+    transition: all .1s ease-in-out; 
 }
 
-/* Add a way to shrink the squares if the screen is shrinking */
+.grow:hover { 
+    transform: scale(1.05); 
+}
+
+.button {
+    height: 30px;
+    align-self: stretch;
+    width: 150px;
+    box-shadow: 0 0 5px rgba(0,0,0,.05), 2px 2px 5px rgba(0,0,0,.1);
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid grey
+}
+
+#message {
+    font-size: 10px;
+    align-self: center;
+}

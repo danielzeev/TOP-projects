@@ -1,71 +1,16 @@
-
-// // Grid constants
-// const numSquaresPerRow    = 16;
-// const numSquaresPerColumn = 16;
-// // const rows = 16;
-// // const columns = 16;
-
-// // Square attributes
-// const squareWidth  = "20px";
-// const squareHeight = "20px";
-// const squareBorder = "2px solid black";
-// // const squarePadding = "2px";
-
-// // Create the grid of squares
-// let gridContainer = document.querySelector(".grid-container")
-
-// for (let i = 1; i <= numSquaresPerRow; i++) {
-//     // Create a div to hold the entire row 
-//     let row = document.createElement("div");
-//     row.className = "row";
-//     // Populate row with `numSquaresPerColumn` squares 
-//     for (let i = 1; i <= numSquaresPerColumn; i++) {
-//         let singleSquare = document.createElement("div");
-//         singleSquare.className = "square";
-
-//         singleSquare.style.width  = squareWidth;
-//         singleSquare.style.height = squareHeight;
-//         singleSquare.style.border = squareBorder;
-        
-//         // Append to row
-//         row.appendChild(singleSquare);
-//     }
-//     // Append row to grid
-//     gridContainer.appendChild(row)
-// }
-
-// // Hover color change
-// gridContainer.addEventListener('mouseover', (event) => {
-//     if (event.target.classList.contains('square')) {
-//         event.target.style.backgroundColor = "orange";
-//     }
-// });
-
-// gridContainer.addEventListener('mousedown', (event) => {
-//     if (event.target.classList.contains('square')) {
-//         event.target.style.backgroundColor = "white";
-//     }
-// });
-
-
-
-
-// Grid constants
-const maxGridPixelWidth  = 300;
-const maxGridPixelHeight = 300;
-
-// To be moved to CSS
-const squareBorder = "1px solid black";
-
 // Selectors
+let body             = document.querySelector("body")
 let gridContainerDiv = document.querySelector(".grid-container")
 let rangeInputSlider = document.getElementById("range-input"); // change to gridSizeSlider?
-let rangeInputValue  = document.getElementById("range-output");
+let rangeText        = document.getElementById("range-output");
 let clearBtn         = document.getElementById("clear-button");
 let rainbowBtn       = document.getElementById("rainbow-button");
 let colorBtn         = document.getElementById("color-button");
 let rainbowMode      = false;
 let squareColor      = colorBtn.value;
+
+// rangeText.textContent = `${rangeInputSlider.value} x ${rangeInputSlider.value}`;
+
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -79,11 +24,6 @@ function createGrid(gridSize) {
     // Clear gird
     removeAllChildNodes(gridContainerDiv);
 
-    // Square attributes - can possibly move to CSS ##################
-    const squareWidth  = Math.floor(maxGridPixelWidth / gridSize)  + "px";
-    const squareHeight = squareWidth;
-    console.log(`Square width: ${squareWidth}`)
-
     // Grid creation
     for (let i = 1; i <= gridSize; i++) {
         
@@ -94,12 +34,7 @@ function createGrid(gridSize) {
         // Populate row with `gridSize` squares 
         for (let i = 1; i <= gridSize; i++) {
             let singleSquare = document.createElement("div");
-            singleSquare.className = "square";
-            
-            // These can be changed with the CSS later  ################
-            singleSquare.style.width  = squareWidth;
-            singleSquare.style.height = squareHeight;
-            singleSquare.style.border = squareBorder;
+            singleSquare.className    = "square";
             
             // Append square to row
             row.appendChild(singleSquare);
@@ -118,9 +53,9 @@ function randomColor() {
 }
 
 // Grid size change (slider)
-rangeInputSlider.addEventListener('change', (event) => {
+rangeInputSlider.addEventListener('input', (event) => {
     gridSize = Number(event.target.value);
-    rangeInputValue.textContent = `${gridSize} x ${gridSize}`;
+    rangeText.textContent = `${gridSize} x ${gridSize}`;
     createGrid(gridSize);
 });
 
@@ -138,7 +73,7 @@ gridContainerDiv.addEventListener('mouseover', (event) => {
 // Erase single square 
 gridContainerDiv.addEventListener('mousedown', (event) => {
     if (event.target.classList.contains('square')) {
-        event.target.style.backgroundColor = "white";
+        event.target.style.backgroundColor = body.style.backgroundColor; //grid color?
     }
 });
 
@@ -147,17 +82,24 @@ clearBtn.addEventListener('click', () => {
     createGrid(gridSize);
 });
 
-// Rainbow mode - include background button color change
+// Rainbow mode 
 rainbowBtn.addEventListener('click', () => {
     rainbowMode = !rainbowMode;
-    rainbowBtn.style.backgroundColor = (rainbowMode) ? "red" : "";
+    rainbowBtn.style.backgroundColor = (rainbowMode) ? "rgb(47,47,47)" : "";
+    rainbowBtn.style.color           = (rainbowMode) ? "white" : "";
 });
+
 
 // Color selection
 colorBtn.addEventListener('input', () => {
-    squareColor = colorBtn.value;
+    colorBtn.style.backgroundColor = colorBtn.value
+    squareColor = colorBtn.value;    
 })
 
+
+
 // Initialize grid
-let gridSize = 16; // need better name for this
-createGrid(gridSize);
+// let gridSize = rangeInputSlider.value; // need better name for this?
+// createGrid(gridSize);
+createGrid(gridSize=rangeInputSlider.value);
+

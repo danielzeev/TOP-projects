@@ -9,19 +9,22 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Etch-a-Sketch</h1>
+    <header>
+      <h1>Etch-a-Sketch</h1>
+    </header>
     <main>        
         <div class="controls-container">
-            <input type="color" id="color-button" value="black">
-            <button class="button" id="rainbow-button">Rainbow</button>
-            <!-- <input type="range" min="4" max="64" value="16" class="slider" id="range-input"> -->
+            <input class="button grow"  id="color-button" type="color" value="black">
+            <button class="button grow" id="rainbow-button">Rainbow</button>
+            <button class="button grow" id="clear-button">Clear</button>
             <div class="grid-range-container">
-                <input type="range" min="4" max="64" value="16" class="slider" id="range-input">
-                <p id="range-output"></p>
-            </div>
-            <button class="button" id="clear-button">Clear</button>
+                <p id="range-output">16 x 16</p>
+                <input type="range" min="4" max="64" value="16" class="slider grow" id="range-input">
+            </div>     
+            <p id="message">Click on a square to erase</p>       
         </div>
-        <div class="grid-container"></div>        
+        <div class="grid-container"></div>
     </main>
+    <!-- <div>Click on a square to erase</div> -->
 </body>
 </html>
