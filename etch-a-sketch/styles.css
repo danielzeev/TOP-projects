@@ -1,16 +1,30 @@
+main {
+    display: flex;
+    gap: 10px;
+}
 
 .grid-container {
     display: flex;
     flex-direction: column;
+    max-width: 960px;
 }
 
 .row {
     display: flex;
 }
 
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+
 .grid-container, 
 .row {
-    gap: 2px;
+    /* gap: 1px; */
 }
 
 /* Add a way to shrink the squares if the screen is shrinking */
