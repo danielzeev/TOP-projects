@@ -82,6 +82,7 @@ clearBtn.addEventListener('click', () => {
     createGrid(gridSize);
 });
 
+
 // Rainbow mode 
 rainbowBtn.addEventListener('click', () => {
     rainbowMode = !rainbowMode;
@@ -95,6 +96,9 @@ colorBtn.addEventListener('input', () => {
     colorBtn.style.backgroundColor = colorBtn.value
     squareColor = colorBtn.value;    
 })
+
+
+
 
 
 
